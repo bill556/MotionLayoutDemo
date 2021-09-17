@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    defaultConfig {
+        applicationId "com.wkk.motionlayoutdemo"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        flavorDimensions "default"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../test.jks')
+            storePassword '123456'
+            keyAlias 'test'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", '"https://www.debug.com"'
+            minifyEnabled true  //混淆开关
+            signingConfig signingConfigs.release
+            zipAlignEnabled true  //Zipalign开关
+            shrinkResources true  //清理开关
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        beta {
+            buildConfigField "String", "BASE_URL", '"https://www.beta.com"'
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "String", "BASE_URL", '"https://www.release.com"'
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        sino {
+            buildConfigField "String", "channel", '"sino"' //变量值
+        }
+        xiaomi {
+            buildConfigField "String", "channel", '"xiaomi"' //变量值
+        }
+        huawei {
+            buildConfigField "String", "channel", '"huawei"' //变量值
+        }
+        oppo {
+            buildConfigField "String", "channel", '"oppo"' //变量值
+        }
+        vivo {
+            buildConfigField "String", "channel", '"vivo"' //变量值
+        }
+    }
+
+    //修改后的命名规则
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def formattedDate = new Date().format('yyyy_MM_dd')
+            outputFileName = "../../../apks/" + rootProject.getName() + "-" + variant.flavorName + "-" + buildType.name + "-" + formattedDate + "-v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk";
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.material:material:1.2.1'
+    testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+}

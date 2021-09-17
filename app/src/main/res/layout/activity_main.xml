@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnHWTel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="仿拨号界面" />
+
+    <Button
+        android:id="@+id/btnViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="和ViewPager组合使用"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnEasterEggs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="仿Android 11 彩蛋"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnMLU"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MLU字母"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnYoutube"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="仿Youtube"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
